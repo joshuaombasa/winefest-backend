@@ -23,14 +23,14 @@ const upload = multer({storage : storage})
 
 app.use(cors())
 
-app.post('/wines', upload.single('product-image'),(req, res) => {
-    const { price, name, description } = req.body
+app.post('/wines', upload.single('wineImage'),(req, res) => {
+    const { winePrice, wineName, wineDescription } = req.body
     const { filename } = req.file
     const sql = `INSERT INTO wine (price, name, description, filename) VALUES (?, ?, ?, ?)`
     
     connection.query(
              sql, 
-             [price, name, description, filename],
+             [winePrice, wineName, wineDescription],
              (error, results) => {
                 if (error) {
                     res.status(500).send({message: 'Product not saved'})
@@ -44,3 +44,4 @@ app.post('/wines', upload.single('product-image'),(req, res) => {
 app.listen(3000, () => {
     console.log('App listening on port 3000')
 })
+
