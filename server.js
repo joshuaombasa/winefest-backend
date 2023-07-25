@@ -26,14 +26,16 @@ app.use(cors())
 app.post('/wines', upload.single('wineImage'),(req, res) => {
     const { winePrice, wineName, wineDescription } = req.body
     const { filename } = req.file
+
+    console.log( winePrice)
     const sql = `INSERT INTO wine (price, name, description, filename) VALUES (?, ?, ?, ?)`
     
     connection.query(
              sql, 
-             [winePrice, wineName, wineDescription],
+             [winePrice, wineName, wineDescription, filename ],
              (error, results) => {
                 if (error) {
-                    res.status(500).send({message: 'Product not saved'})
+                    res.send(error)
                 } else {
                     res.send({message: 'Product saved successfully'})
                 }
