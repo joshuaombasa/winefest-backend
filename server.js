@@ -27,7 +27,7 @@ app.post('/wines', upload.single('wineImage'),(req, res) => {
     const { winePrice, wineName, wineDescription } = req.body
     const { filename } = req.file
 
-    console.log( winePrice)
+    // console.log( winePrice)
     const sql = `INSERT INTO wine (price, name, description, filename) VALUES (?, ?, ?, ?)`
     
     connection.query(
@@ -41,6 +41,21 @@ app.post('/wines', upload.single('wineImage'),(req, res) => {
                 }
              }
         )
+})
+
+app.get('/wines', (req, res) => {
+    const sql = `SELECT * FROM wine ORDER BY price`
+
+    connection.query(
+        sql,
+        (error, results) => {
+            if (error) {
+                res.send(error)
+            } else {
+                res.send(results)
+            }
+        }
+    )
 })
 
 app.listen(3000, () => {
