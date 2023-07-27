@@ -68,8 +68,24 @@ app.get('/wines', (req, res) => {
 })
 
 app.post('/order', (req, res) => {
-    console.log(req.body)
+   const { product_id, price, name,filename } = req.body
+
+    const sql = `INSERT INTO orders (id, price, name, filename) VALUES (?, ?, ?, ?)`
+
+    connection.query(
+        sql,
+        [product_id, price, name, filename],
+        (error, results) => {
+            if (error) {
+                res.send(error)
+            } else {
+                res.send({message : `${name} added to cart successfully`})
+            }
+        }
+    )
 })
+
+app.get('/order')
 
 app.listen(3000, () => {
     console.log('App listening on port 3000')
