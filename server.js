@@ -67,7 +67,7 @@ app.get('/wines', (req, res) => {
     )
 })
 
-app.post('/order', (req, res) => {
+app.post('/orders', (req, res) => {
    const { product_id, price, name,filename } = req.body
 
     const sql = `INSERT INTO orders (id, price, name, filename) VALUES (?, ?, ?, ?)`
@@ -85,7 +85,21 @@ app.post('/order', (req, res) => {
     )
 })
 
-app.get('/order')
+app.get('/orders', (req, res) => {
+    const sql = `SELECT * FROM orders`
+
+    connection.query(
+        sql,
+        (error, results) => {
+            if (error) {
+                res.send(error) 
+            } else {
+                res.send(results)
+            }
+        }
+
+    )
+})
 
 app.listen(3000, () => {
     console.log('App listening on port 3000')
