@@ -2,7 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const mysql = require('mysql')
 const multer = require('multer')
-const { message } = require('statuses')
+// const { message } = require('statuses')
 const app = express()
 
  const connection = mysql.createConnection({
@@ -22,6 +22,10 @@ const storage = multer.diskStorage({
 const upload = multer({storage : storage})
 
 app.use(cors())
+
+app.use(express.json())
+
+// app.use(express.urlencoded({extended: false}))
 
 app.post('/wines', upload.single('wineImage'),(req, res) => {
     const { winePrice, wineName, wineDescription } = req.body
@@ -43,6 +47,11 @@ app.post('/wines', upload.single('wineImage'),(req, res) => {
         )
 })
 
+app.get('/wines/:filename', (req,res) => {
+    const { filename } = req.params
+    res.sendFile(filename, {root : './wines/'})
+})
+
 app.get('/wines', (req, res) => {
     const sql = `SELECT * FROM wine ORDER BY price`
 
@@ -56,6 +65,10 @@ app.get('/wines', (req, res) => {
             }
         }
     )
+})
+
+app.post('/order', (req, res) => {
+    console.log(req.body)
 })
 
 app.listen(3000, () => {
