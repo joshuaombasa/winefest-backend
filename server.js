@@ -101,6 +101,24 @@ app.get('/orders', (req, res) => {
     )
 })
 
+app.delete('/orders/:id', (req, res) => {
+    const {id} = req.params
+
+    const sql = `DELETE FROM orders WHERE id = ?`
+
+    connection.query(
+        sql,
+        [parseInt(id)],
+        (error, results) => {
+            if (error) {
+                console.log(error)
+            } else {
+                res.send(results)
+            }
+        }
+    )
+})
+
 app.listen(3000, () => {
     console.log('App listening on port 3000')
 })
