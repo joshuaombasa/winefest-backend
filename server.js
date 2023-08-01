@@ -14,8 +14,8 @@ const app = express()
 
 const storage = multer.diskStorage({
     destination : './wines/',
-    filename : (req, file, cb) => {
-        cb(null, Date.now() + '-' + file.originalname) 
+    filename : (req, file, callback) => {
+        callback(null, Date.now() + '-' + file.originalname) 
     }
 })
 
@@ -31,7 +31,7 @@ app.post('/wines', upload.single('wineImage'),(req, res) => {
     const { winePrice, wineName, wineDescription } = req.body
     const { filename } = req.file
 
-    // console.log( winePrice)
+    
     const sql = `INSERT INTO wine (price, name, description, filename) VALUES (?, ?, ?, ?)`
     
     connection.query(
