@@ -1,5 +1,14 @@
 const express = require('express')
 const multer = require('multer')
+const mysql = require('mysql')
+
+const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'winefest'
+})
+
 
 const storage = multer.diskStorage({
     destination : './wines/',
