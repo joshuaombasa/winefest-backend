@@ -1,18 +1,13 @@
 const express = require('express')
 const cors = require('cors')
-const mysql = require('mysql')
+
 
 const wineRoutes = require('./routes/wines')
 const orderRoutes = require('./routes/orders')
+
 const app = express()
 
- const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'winefest'
-})
-
+ 
 
 
 app.use(cors())
