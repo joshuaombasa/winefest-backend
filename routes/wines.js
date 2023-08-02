@@ -61,4 +61,23 @@ router.get('/', (req, res) => {
     )
 })
 
+router.delete('/:id', (req, res) => {
+
+    const {id} = req.params
+
+    const sql = 'DELETE FROM wine WHERE ID = ?'
+
+    connection.query(
+        sql,
+        [parseInt(id)],
+        (error, results) => {
+            if (error) {
+                res.json(error)
+            } else {
+                res.json({message: 'Wine deleted successfully!'})
+            }
+        }
+    )
+})
+
 module.exports = router
