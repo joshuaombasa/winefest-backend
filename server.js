@@ -4,17 +4,15 @@ const cors = require('cors')
 
 const wineRoutes = require('./routes/wines')
 const orderRoutes = require('./routes/orders')
+const loginRoutes = require('./routes/login')
 
 const app = express()
 
- 
-
-
 app.use(cors())
-
 app.use(express.json())
+app.use(express.urlencoded({extended: false}))
 
-// app.use(express.urlencoded({extended: false}))
+app.use('/login', loginRoutes)
 
 app.use('/wines', wineRoutes)
 
