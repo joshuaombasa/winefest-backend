@@ -13,9 +13,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 
 app.use('/login', loginRoutes)
-
 app.use('/wines', wineRoutes)
-
 app.use('/orders', orderRoutes)
 
 app.listen(3000, () => {
