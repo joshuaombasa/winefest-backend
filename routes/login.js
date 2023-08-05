@@ -1,10 +1,6 @@
 const express = require('express')
 const router = express.Router()
-
-router.post('/', (req, res) => {
-    const { email, password } = req.body
-    console.log(email, password)
-    res.json({message : 'Login successful'})
-})
+const loginCtrl = require('../controllers/loginController')
+router.post('/', loginCtrl.loginDealer)
 
 module.exports = router
