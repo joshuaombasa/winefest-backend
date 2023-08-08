@@ -1,10 +1,10 @@
 const express = require('express')
 const cors = require('cors')
 
-
 const wineRoutes = require('./routes/wines')
 const orderRoutes = require('./routes/orders')
 const loginRoutes = require('./routes/login')
+const vendorRoutes= require('./routes/vendor')
 
 const app = express()
 
@@ -15,6 +15,7 @@ app.use(express.urlencoded({extended: false}))
 app.use('/login', loginRoutes)
 app.use('/wines', wineRoutes)
 app.use('/orders', orderRoutes)
+app.use('/vendor', vendorRoutes)
 
 app.listen(3000, () => {
     console.log('App listening on port 3000')
