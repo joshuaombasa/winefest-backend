@@ -17,7 +17,7 @@ const winesCtrl = require('../controllers/winesController')
 
 
 router.get('/:filename', winesCtrl.getWineImage)
-router.post('/', upload.single('wineImage'), winesCtrl.addNewWine)
+router.post('/',  upload.single('wineImage'), winesCtrl.addNewWine)
 router.get('/', winesCtrl.getAllWines)
 router.delete('/:id', winesCtrl.deleteSingleWine)
 
