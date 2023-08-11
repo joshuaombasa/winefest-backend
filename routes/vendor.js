@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const auth = require('../middleware/authLogic')
+const auth = require('../middleware/authLogic.js')
 const { check, validationResult } = require('express-validator')
 const mysql = require('mysql2/promise')
 const bcrypt = require('bcrypt')
