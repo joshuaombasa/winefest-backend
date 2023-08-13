@@ -20,8 +20,7 @@ router.post('/', [
     check("password", "Please provide a password greater than 7 characters").isLength({min: 8})
 ], async (req, res) => {
     const { email, password } = req.body
-    console.log(email, password)
-    
+ 
     const errors = validationResult(req)
 
     if (!errors.isEmpty()) {
