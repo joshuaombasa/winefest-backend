@@ -1,7 +1,7 @@
 const express = require('express')
 const { check, validationResult} = require('express-validator')
 const router = express.Router()
-const loginCtrl = require('../controllers/loginController')
+
 
 const mysql = require('mysql2/promise')
 const JWT = require('jsonwebtoken')
@@ -32,13 +32,16 @@ router.post('/', [
         const getUserSql = `SELECT * FROM vendor WHERE email=?`
         const [rows] = await connection.query(getUserSql, [email])
         if (rows.length === 0) {
+            connection.end()
            return res.status(400).json({message: "User does not exists please sign up"})
         }
 
         const token = JWT.sign({userId : rows[0].id}, SECRET_KEY, {expiresIn : '1h'})
+        connection.end()
         return res.status(200).json({message: "Login Successful", token: token})
 
     } catch(error) {
+        connection.end()
         return res.status(400).json({error : [{"message" : error}]})
     }
 })
