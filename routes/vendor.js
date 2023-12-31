@@ -38,7 +38,7 @@ router.post('/', [
             return res.status(400).json({ error: "User already exists" })
         }
         const saltRouds = 10
-        const hashedPassword = await bcrypt.hash(password, 10)
+        const hashedPassword = await bcrypt.hash(password, saltRouds)
 
         const createUserSql = `INSERT INTO vendor (first_name,  last_name, email, password) VALUES (?,?,?,?)`
         await connection.query(createUserSql, [firstname, lastname, email, hashedPassword])
